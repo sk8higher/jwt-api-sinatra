@@ -40,6 +40,7 @@ GEM
     rackup (2.1.0)
       rack (>= 3)
       webrick (~> 1.8)
+    rake (13.2.1)
     ruby2_keywords (0.0.5)
     sinatra (4.0.0)
       mustermann (~> 3.0)
@@ -59,6 +60,7 @@ PLATFORMS
 DEPENDENCIES
   mongoid
   rackup
+  rake (~> 13.2)
   sinatra
 
 BUNDLED WITH
