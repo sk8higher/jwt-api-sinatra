@@ -5,3 +5,7 @@ gem 'sinatra'
 gem 'rackup'
 
 gem "rake", "~> 13.2"
+
+gem "jwt", "~> 2.8"
+
+gem "json", "~> 2.7"
