@@ -1,0 +1,24 @@
+version: '3.3'
+services:
+  app:
+    build:
+      context: .
+    ports:
+      - '4567:4567'
+    volumes:
+      - .:/jwt-api-sinatra
+    depends_on:
+      - mongo
+    links:
+      - mongo
+  
+  mongo:
+    ports:
+      - '27017:27017'
+    restart: always
+    logging:
+      options:
+        max-size: 1g
+    env_file:
+      - '.env.db'
+    image: mongo
