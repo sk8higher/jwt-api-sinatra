@@ -1,3 +1,6 @@
+require 'jwt'
+require 'base64'
+require 'bcrypt'
 require 'mongoid'
 
 class User
@@ -5,4 +8,52 @@ class User
   include Mongoid::Attributes::Dynamic
 
   field :refresh_token, type: String
+  field :email, type: String
+
+  def generate_access_token(ip)
+    JWT.encode(payload('access', ip), ENV['JWT_SECRET'], 'HS512')
+  end
+
+  def generate_refresh_token(ip)
+    raw_token = JWT.encode(payload('refresh', ip), ENV['JWT_SECRET'], 'HS512')
+    hashed_token = BCrypt::Password.create(raw_token)
+
+    update(refresh_token: hashed_token)
+
+    Base64.strict_encode64(raw_token)
+  end
+
+  def refresh_access_token(refresh_token, ip)
+    return nil unless valid_refresh_token?(refresh_token)
+
+    update(refresh_token: nil)
+
+    generate_access_token(ip)
+  end
+
+  def valid_refresh_token?(refresh_token)
+    hashed_token = self[:refresh_token]
+
+    return false if hashed_token.nil?
+
+    BCrypt::Password.new(hashed_token) == Base64.strict_decode64(refresh_token)
+  end
+
+  private
+
+  def payload(type, ip)
+    {
+      exp: type == 'access' ? Time.now.to_i + 60 * 60 : Time.now.to_i + 60 * 360,
+      iat: Time.now.to_i,
+      iss: ENV['JWT_ISSUER'],
+      user: {
+        user_id: self[:id],
+        ip: ip
+      }
+    }
+  end
+
+  def send_email(email)
+    # TODO
+  end
 end
