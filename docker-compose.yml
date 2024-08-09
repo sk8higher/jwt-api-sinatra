@@ -6,7 +6,8 @@ services:
     ports:
       - '4567:4567'
     volumes:
-      - .:/jwt-api-sinatra
+      - ./:/jwt-api-sinatra
+    env_file: .env.db
     depends_on:
       - mongo
     links:
