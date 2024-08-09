@@ -19,6 +19,8 @@ services:
     logging:
       options:
         max-size: 1g
-    env_file:
-      - '.env.db'
+    env_file: .env.db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
     image: mongo
