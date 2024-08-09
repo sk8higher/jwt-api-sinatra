@@ -8,7 +8,7 @@ namespace :db do
     User.delete_all
 
     10.times do
-      user = User.create
+      user = User.create(refresh_token: '')
       puts "Created user with ID #{user.id}"
     end
   end
