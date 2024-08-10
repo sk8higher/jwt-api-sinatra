@@ -33,4 +33,6 @@ EMAIL_APP_USERNAME=<app-username>
 
 ## Email sent after refreshing from another ip:
 
+(may not work on the hosted service because google keeps disabling my account)
+
 ![image](https://github.com/user-attachments/assets/862dc38e-489e-400e-9ed3-5195f32939ae)
