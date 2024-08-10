@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'bcrypt'
 require 'base64'
 require 'json'
@@ -48,19 +50,17 @@ class Api < Sinatra::Base
   private
 
   def decode_jwt(token)
-    begin
-      options = { algorithm: 'HS512', iss: ENV['JWT_ISSUER'] }
-      payload, header = JWT.decode(token, ENV['JWT_SECRET'], true, options)
+    options = { algorithm: 'HS512', iss: ENV['JWT_ISSUER'] }
+    payload, = JWT.decode(token, ENV['JWT_SECRET'], true, options)
 
-      payload
-    rescue JWT::DecodeError
-      halt 401, { error: 'A token must be passed.' }.to_json
-    rescue JWT::ExpiredSignature
-      halt 403, { error: 'The token has expired.' }.to_json
-    rescue JWT::InvalidIssuerError
-      halt 403, { error: 'The token does not have a valid issuer.' }.to_json
-    rescue JWT::InvalidIatError
-      halt 403, { error: 'The token does not have a valid "issued at" time.' }.to_json
-    end
+    payload
+  rescue JWT::DecodeError
+    halt 401, { error: 'A token must be passed.' }.to_json
+  rescue JWT::ExpiredSignature
+    halt 403, { error: 'The token has expired.' }.to_json
+  rescue JWT::InvalidIssuerError
+    halt 403, { error: 'The token does not have a valid issuer.' }.to_json
+  rescue JWT::InvalidIatError
+    halt 403, { error: 'The token does not have a valid "issued at" time.' }.to_json
   end
 end

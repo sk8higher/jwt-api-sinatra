@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative './../spec_helper'
 require_relative './../../models/user'
 require 'base64'
@@ -6,6 +8,7 @@ require 'mongoid'
 Mongoid.load!(File.join(File.dirname(__FILE__), '../../', 'config', 'mongoid.yml'))
 Mongoid.raise_not_found_error = false
 
+# rubocop:disable Metrics/BlockLength
 RSpec.describe Api do
   before(:all) do
     @user = User.create!(email: 'test@test.ru')
@@ -66,3 +69,5 @@ RSpec.describe Api do
     end
   end
 end
+
+# rubocop:enable Metrics/BlockLength

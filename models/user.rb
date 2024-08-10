@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'jwt'
 require 'base64'
 require 'bcrypt'
@@ -43,7 +45,7 @@ class User
   def send_email(ip)
     Mail.defaults do
       delivery_method :smtp, {
-        address: "smtp.gmail.com",
+        address: 'smtp.gmail.com',
         port: 587,
         user_name: ENV['EMAIL_APP_USERNAME'],
         password: ENV['EMAIL_APP_PASSWORD'],
