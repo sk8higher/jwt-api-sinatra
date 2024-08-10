@@ -29,6 +29,8 @@ JWT_SECRET=<jwt-secret>
 JWT_ISSUER=<jwt-issuer>
 EMAIL_APP_PASSWORD=<app-pass>
 EMAIL_APP_USERNAME=<app-username>
+```
 
 ## Email sent after refreshing from another ip:
+
 ![image](https://github.com/user-attachments/assets/862dc38e-489e-400e-9ed3-5195f32939ae)
