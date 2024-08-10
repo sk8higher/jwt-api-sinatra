@@ -15,3 +15,7 @@ gem "bcrypt", "~> 3.1"
 gem "dotenv", "~> 3.1"
 
 gem "mail", "~> 2.8"
+
+gem "rack-test", "~> 2.1"
+
+gem "rspec", "~> 3.13"
