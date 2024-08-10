@@ -40,20 +40,6 @@ class User
     BCrypt::Password.new(hashed_token) == Base64.strict_decode64(refresh_token)
   end
 
-  private
-
-  def payload(type, ip)
-    {
-      exp: type == 'access' ? Time.now.to_i + 60 * 60 : Time.now.to_i + 60 * 360,
-      iat: Time.now.to_i,
-      iss: ENV['JWT_ISSUER'],
-      user: {
-        user_id: self[:id],
-        ip: ip
-      }
-    }
-  end
-
   def send_email(ip)
     Mail.defaults do
       delivery_method :smtp, {
@@ -72,5 +58,19 @@ class User
       subject 'Warning! Your access token has been refreshed from a new IP'
       body "Your access token has been refreshed from this IP address: #{ip}."
     end
+  end
+
+  private
+
+  def payload(type, ip)
+    {
+      exp: type == 'access' ? Time.now.to_i + 60 * 60 : Time.now.to_i + 60 * 360,
+      iat: Time.now.to_i,
+      iss: ENV['JWT_ISSUER'],
+      user: {
+        user_id: self[:id],
+        ip: ip
+      }
+    }
   end
 end

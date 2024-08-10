@@ -54,7 +54,7 @@ class Api < Sinatra::Base
 
       payload
     rescue JWT::DecodeError
-      halt 401, { error: "A token must be passed. #{e.message}" }.to_json
+      halt 401, { error: 'A token must be passed.' }.to_json
     rescue JWT::ExpiredSignature
       halt 403, { error: 'The token has expired.' }.to_json
     rescue JWT::InvalidIssuerError
