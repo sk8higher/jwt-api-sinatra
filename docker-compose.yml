@@ -6,7 +6,8 @@ services:
     ports:
       - '4567:4567'
     volumes:
-      - .:/jwt-api-sinatra
+      - ./:/jwt-api-sinatra
+    env_file: .env.db
     depends_on:
       - mongo
     links:
@@ -19,6 +20,8 @@ services:
     logging:
       options:
         max-size: 1g
-    env_file:
-      - '.env.db'
+    env_file: .env.db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
     image: mongo

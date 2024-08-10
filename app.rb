@@ -1,11 +1,10 @@
+require 'dotenv/load'
+
 require 'sinatra'
 require 'mongoid'
 
 require_relative './models/user'
+require_relative './controllers/api'
 
 Mongoid.load!(File.join(File.dirname(__FILE__), 'config', 'mongoid.yml'))
-
-get '/' do
-  user = User.create!
-  user.to_json
-end
+Mongoid.raise_not_found_error = false
