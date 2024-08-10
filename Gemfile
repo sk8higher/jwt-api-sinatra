@@ -13,3 +13,5 @@ gem "json", "~> 2.7"
 gem "bcrypt", "~> 3.1"
 
 gem "dotenv", "~> 3.1"
+
+gem "mail", "~> 2.8"
