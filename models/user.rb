@@ -2,6 +2,7 @@ require 'jwt'
 require 'base64'
 require 'bcrypt'
 require 'mongoid'
+require 'mail'
 
 class User
   include Mongoid::Document
@@ -53,7 +54,23 @@ class User
     }
   end
 
-  def send_email(email)
-    # TODO
+  def send_email(ip)
+    Mail.defaults do
+      delivery_method :smtp, {
+        address: "smtp.gmail.com",
+        port: 587,
+        user_name: ENV['EMAIL_APP_USERNAME'],
+        password: ENV['EMAIL_APP_PASSWORD'],
+        authentication: :plain,
+        enable_starttls_auto: true
+      }
+    end
+
+    Mail.deliver do
+      from 'apitestingjwtauth@gmail.com'
+      to self[:email]
+      subject 'Warning! Your access token has been refreshed from a new IP'
+      body "Your access token has been refreshed from this IP address: #{ip}."
+    end
   end
 end

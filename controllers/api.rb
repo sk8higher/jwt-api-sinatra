@@ -34,7 +34,7 @@ class Api < Sinatra::Base
 
     new_access_token = @user.refresh_access_token(refresh_token, request.ip)
 
-    send_email(@user.email) if decoded_access_token['user']['ip'] != request.ip
+    @user.send_email(request.ip) if decoded_access_token['user']['ip'] != request.ip
 
     if new_access_token.nil?
       halt 401, { error: 'Invalid refresh_token' }.to_json
