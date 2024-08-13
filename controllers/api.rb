@@ -7,7 +7,7 @@ require 'jwt'
 require 'sinatra/base'
 
 class Api < Sinatra::Base
-  get '/tokens' do
+  get '/:user_id/tokens' do
     content_type :json
 
     @user = User.find(params[:user_id])
@@ -22,7 +22,7 @@ class Api < Sinatra::Base
     end
   end
 
-  post '/refresh' do
+  post '/:user_id/refresh' do
     content_type :json
 
     refresh_token = params[:refresh_token]
