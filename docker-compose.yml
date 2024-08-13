@@ -9,19 +9,18 @@ services:
       - ./:/jwt-api-sinatra
     env_file: .env.db
     depends_on:
-      - mongo
+      - postgres
     links:
-      - mongo
-  
-  mongo:
-    ports:
-      - '27017:27017'
-    restart: always
-    logging:
-      options:
-        max-size: 1g
-    env_file: .env.db
+      - postgres
+
+  postgres:
+    image: postgres
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    env_file:
+      - '.env.db'
     environment:
-      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
-      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
-    image: mongo
+      POSTGRES_HOST_AUTH_METHOD: "trust"
+
+volumes:
+  postgres:
