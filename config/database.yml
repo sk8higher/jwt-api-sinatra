@@ -1,0 +1,21 @@
+default: &default
+  adapter: postgresql
+  pool: 5
+  url: <%= ENV.fetch("DATABASE_URL") %>
+
+development:
+  <<: *default
+  database: jwt_api_development
+
+test:
+  <<: *default
+  database: jwt_api_test
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  host: <%= ENV['DATABASE_HOST'] || 'db' %>
+  database: <%= ENV['DATABASE_NAME'] || 'sinatra' %>
+  username: <%= ENV['DATABASE_USER'] || 'sinatra' %>
+  password: <%= ENV['DATABASE_PASSWORD'] || 'sinatra' %>
