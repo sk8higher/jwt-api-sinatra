@@ -21,3 +21,7 @@ gem 'mail', '~> 2.8'
 gem 'rack-test', '~> 2.1'
 
 gem 'rspec', '~> 3.13'
+
+gem "pg", "~> 1.5"
+
+gem "sinatra-activerecord", "~> 2.0"
