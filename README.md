@@ -9,10 +9,10 @@ Hosted application onto a VPS (docker containers) [here](http://95.174.94.72:456
 ## POST /api/user
 Only on hosted version, to create a mock user. Requires `email` param, returns `user_id` to use in other requests.
 
-## GET /api/tokens
+## GET /api/:user_id/tokens
 Requires `user_id` param, returns `access_token` and `refresh_token`.
 
-## POST /api/refresh
+## POST /api/:user_id/refresh
 Requires `user_id`, `refresh_token` params, Authorization header in `Bearer <access token>` format. Returns a new access token.
 
 ## Local dev
