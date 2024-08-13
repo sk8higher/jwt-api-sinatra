@@ -7,9 +7,9 @@ require 'jwt'
 require 'sinatra/base'
 
 class Api < Sinatra::Base
-  get '/:user_id/tokens' do
-    content_type :json
+  set :default_content_type, :json
 
+  get '/:user_id/tokens' do
     @user = User.find(params[:user_id])
 
     if @user.nil?
@@ -23,8 +23,6 @@ class Api < Sinatra::Base
   end
 
   post '/:user_id/refresh' do
-    content_type :json
-
     refresh_token = params[:refresh_token]
     access_token = env.fetch('HTTP_AUTHORIZATION', '').slice(7..-1)
 
