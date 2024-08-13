@@ -17,18 +17,18 @@ Requires `user_id`, `refresh_token` params, Authorization header in `Bearer <acc
 
 ## Local dev
 
+`rake db:create && rake db:migrate`
+
 To seed the db: `rake db:seed`
 
 `.env.db` file contents:
 
 ```
-MONGO_INITDB_ROOT_USERNAME=<username>
-MONGO_INITDB_ROOT_PASSWORD=<pass>
-MONGOID_ENV=development
 JWT_SECRET=<jwt-secret>
 JWT_ISSUER=<jwt-issuer>
 EMAIL_APP_PASSWORD=<app-pass>
 EMAIL_APP_USERNAME=<app-username>
+DATABASE_URL=<postgres-db-url>
 ```
 
 ## Email sent after refreshing from another ip:
