@@ -3,15 +3,11 @@
 require 'jwt'
 require 'base64'
 require 'bcrypt'
-require 'mongoid'
 require 'mail'
+require 'sinatra/activerecord'
 
-class User
-  include Mongoid::Document
-  include Mongoid::Attributes::Dynamic
-
-  field :refresh_token, type: String
-  field :email, type: String
+class User < ActiveRecord::Base
+  validates :email, format: URI::MailTo::EMAIL_REGEXP, presence: true
 
   def generate_access_token(ip)
     JWT.encode(payload('access', ip), ENV['JWT_SECRET'], 'HS512')

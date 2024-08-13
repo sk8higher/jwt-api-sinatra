@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative './app'
+require './app'
 
 run Rack::URLMap.new({
                        '/api' => Api
