@@ -4,7 +4,7 @@ Run requests in Postman:
 
 [<img src="https://run.pstmn.io/button.svg" alt="Run In Postman" style="width: 128px; height: 32px;">](https://god.gw.postman.com/run-collection/34454879-47cdf2ae-e410-475c-994c-ab76f34dee56?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D34454879-47cdf2ae-e410-475c-994c-ab76f34dee56%26entityType%3Dcollection%26workspaceId%3D3aa4d990-fe59-4d29-bfac-8d664e6f37dc)
 
-Hosted application onto a VPS (docker containers) [here](http://95.174.94.72:4567)
+Hosted application onto a VPS (docker containers) (outdated)
 
 ## POST /api/user
 Only on hosted version, to create a mock user. Requires `email` param, returns `user_id` to use in other requests.
